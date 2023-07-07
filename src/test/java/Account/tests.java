@@ -30,8 +30,20 @@ public class tests {
         double result =  acc.fullWithDraw();
         Assertions.assertTrue(expectedValue == acc.getBalance());
         Assertions.assertTrue(result == initialBalance);
+    }
+    @Test
+    public void withdrawShouldDecreaseBalanceWhenSufficientBalance(){
+        Account acc = new Account(4, 800);
+        acc.withdraw(500);
+        Assertions.assertEquals(300, acc.getBalance());
 
-
+    }
+    @Test
+    public void withdrawShouldThrowExceptionWhenInsufficientBalance(){
+        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+            Account acc = new Account(4, 800);
+            acc.withdraw(801);
+        });
 
     }
 }
